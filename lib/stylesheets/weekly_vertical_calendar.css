@@ -1,0 +1,16 @@
+#week{background:#FFF;width:1100px;height:1000px;border:1px solid #ccc;overflow:hidden;font-family:sans-serif}
+#days{width:1050px;height:1000px;float:right;}
+#hours{width:50px;height:1000px;float:left;overflow:auto;}
+
+#days_header{width:1050px;height:40px;background: #b7edba;margin-bottom:1px;}
+#grid{width:1050px;height:960px;background-color: #f6f6b4;}
+
+#hour_header{height:40px;border-right:1px solid #8F8F8F;}
+#hour{height:39px;border-right:1px solid #8F8F8F;border-top:1px solid #ccc;text-align:center;line-height:39px}
+
+#day_header_box{height:40px;width:149px;border-right:1px solid #cfe6ec;float:left;text-align:center;}
+#day_column{width:149px;height:960px;position:relative;border-right:1px solid #cfe6ec;float:left;background:url("/images/line.png") repeat-y top left;}
+
+#day_column #event{background: #8bdef2;position:absolute;width:149px;color:#000;opacity:0.70;filter:alpha(opacity=70);cursor:pointer;margin-top:1px;font-size:10px}
+/*#day_column #event:hover {font-size:15px;}*/
+#day_column #event a{color:#333;}
