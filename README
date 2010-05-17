@@ -1,0 +1,46 @@
+====== ======== ========
+WEEKLY VERTICAL CALENDAR
+====== ======== ========
+
+This is another way for displaying weekly calendar, but this time it is vertical.
+
+Installation:
+=============
+ruby script/plugin install git@github.com:kayinrage/weekly_vertical_calendar.git
+
+You will need an Event model if you want to display events on this calendar
+Event should have folowing fields:
+start_at (datetime)
+end_at (datetime)
+
+Usage:
+======
+in the controller:
+
+  @date = Time.parse("#{params[:start_date]} || Time.now.utc")
+  @date = @date - (@date.wday==0 ? 6 : @date.wday-1).days
+  @start_date = Date.new(@date.year, @date.month, @date.day)
+  @end_date = @start_date + 7
+  @events = Event.find(:all, :conditions => ['(start_at between ? and ?) or (end_at between ? and ?) or (start_at < ? and end_at > ?)',
+                                              @start_date, @end_date, @start_date, @end_date, @start_date, @end_date])
+
+
+in the view:
+
+ <%= stylesheet_link_tag 'weekly_vertical_calendar' %>
+
+ <% weekly_vertical_calendar_links(:date => @date) %>
+ <% weekly_vertical_calendar(@events, :date => @date) do |w| %>
+     <% w.week do |event| %>
+         <% if event.start_at.strftime('%j') == event.end_at.strftime('%j') %>
+             <%= event.start_at.strftime('%H:%M') %> -<%= event.end_at.strftime('%H:%M') %>
+         <% else %>
+             <%= event.start_at.strftime('%H:%M %d.%m') %> - <%= event.end_at.strftime('%H:%M %d.%m') %>
+         <% end %>
+         <%= link_to truncate(event.name), nil %>
+     <% end -%>
+ <% end -%>
+
+
+
+Copyright (c) 2010 Irenuesz Skrobis, released under the MIT license
